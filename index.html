@@ -62,8 +62,7 @@
 
   /* ---------- HERO ---------- */
   .hero{
-    padding:76px 0 64px;
-    display:grid; grid-template-columns:1.05fr 0.95fr; gap:50px; align-items:center;
+    padding:32px 0 64px;
   }
   .kicker{
     display:inline-flex; align-items:center; gap:8px;
@@ -85,13 +84,35 @@
   .btn-ghost{ border:1px solid var(--line); }
   .btn-ghost:hover{ border-color:var(--orange); color:var(--orange-bright); }
 
-  .hero-visual{
-    aspect-ratio:4/3.1; border-radius:16px; overflow:hidden; position:relative;
-    background:linear-gradient(150deg,#1c1512,#0c0c0e 65%);
-    border:1px solid var(--line);
+  /* ---------- HERO BANNER (full-bleed photo) ---------- */
+  .hero-banner{
+    position:relative; overflow:hidden; border-radius:16px;
+    margin-top:24px; min-height:340px;
+    display:flex; align-items:center; justify-content:flex-end;
   }
-  .hero-visual svg{ width:100%; height:100%; }
-  @media (max-width:880px){ .hero{ grid-template-columns:1fr; padding:44px 0; } h1{ font-size:2.1rem; } .hero-visual{ order:-1; } }
+  .hero-banner img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0;
+  }
+  .hero-banner::before{
+    content:""; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(90deg, rgba(6,6,7,0.97) 0%, rgba(6,6,7,0.88) 32%, rgba(6,6,7,0.45) 60%, rgba(6,6,7,0.05) 85%);
+  }
+  .hero-banner-content{ position:relative; z-index:2; padding:44px 40px; max-width:640px; }
+  .hero-logo-line{ display:flex; align-items:baseline; gap:4px; margin-bottom:6px; }
+  .hero-logo-line .lg1{ font-size:2.6rem; font-weight:900; color:#fff; letter-spacing:-0.02em; font-family:'Tajawal',sans-serif; font-style:italic; }
+  .hero-logo-line .lg1 .dot{ color:var(--orange); }
+  .hero-logo-line2{ font-size:1.6rem; font-weight:800; color:var(--orange); margin-bottom:18px; font-family:'Tajawal',sans-serif; }
+  .hero-banner h1{ font-size:1.5rem; margin-bottom:14px; }
+  .hero-banner .hero-desc{ font-size:0.95rem; margin-bottom:16px; max-width:100%; }
+  .hero-banner .hero-feats{ margin:14px 0 22px; gap:16px; }
+  .hero-banner .hero-feat{ font-size:0.8rem; }
+  @media (max-width:760px){
+    .hero-banner{ min-height:auto; justify-content:flex-start; }
+    .hero-banner-content{ padding:32px 22px; max-width:100%; }
+    .hero-banner::before{ background:linear-gradient(180deg, rgba(6,6,7,0.75) 0%, rgba(6,6,7,0.94) 55%, rgba(6,6,7,0.98) 100%); }
+    .hero-logo-line .lg1{ font-size:1.9rem; }
+    .hero-logo-line2{ font-size:1.2rem; }
+  }
 
   /* ---------- shared section ---------- */
   section{ padding:76px 0; }
@@ -223,42 +244,27 @@
 <main class="wrap">
 
   <!-- HERO -->
-  <section class="hero" style="padding-top:76px;">
-    <div>
-      <span class="kicker">● فيصل، الجيزة — من عام 2001</span>
-      <h1>صيانة الكمبيوتر واللاب توب <span class="hl">باحتراف</span></h1>
-      <p class="hero-desc">إصلاح الأعطال الصعبة <strong>التي ترفضها محلات أخرى</strong> — من التشخيص السريع لحد لحام الشاسيهات المكسورة تمامًا.</p>
-      <div class="hero-feats">
-        <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35"/></svg> تشخيص دقيق</div>
-        <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg> إصلاح احترافي</div>
-        <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg> أسعار عادلة</div>
+  <section class="hero" style="padding-top:24px;">
+    <div class="hero-banner">
+      <img src="assets/hero-board.jpg" alt="فني تيتو بيصلح بورد لابتوب">
+      <div class="hero-banner-content">
+        <div class="hero-logo-line"><span class="lg1">TiTO<span class="dot">.</span></span></div>
+        <div class="hero-logo-line2">Computer Care</div>
+        <h1>صيانة الكمبيوتر واللاب توب <span class="hl">باحتراف</span></h1>
+        <p class="hero-desc">إصلاح الأعطال الصعبة <strong>التي ترفضها محلات أخرى</strong></p>
+        <div class="hero-feats">
+          <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4a7 7 0 100 14 7 7 0 000-14zM21 21l-4.35-4.35"/></svg> تشخيص دقيق</div>
+          <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg> إصلاح احترافي</div>
+          <div class="hero-feat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg> أسعار عادلة</div>
+        </div>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://wa.me/201143080343" target="_blank">
+            احجز صيانة الآن
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </a>
+          <a class="btn btn-ghost" href="#services">تعرف على خدماتنا</a>
+        </div>
       </div>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="https://wa.me/201143080343" target="_blank">
-          احجز صيانة الآن
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </a>
-        <a class="btn btn-ghost" href="#services">تعرف على خدماتنا</a>
-      </div>
-    </div>
-    <div class="hero-visual">
-      <svg viewBox="0 0 400 320" fill="none">
-        <rect width="400" height="320" fill="#0c0c0e"/>
-        <rect x="60" y="50" width="280" height="220" rx="10" fill="#141416" stroke="#2a2a2e"/>
-        <rect x="90" y="80" width="220" height="140" rx="4" fill="#0c0c0e" stroke="#2a2a2e"/>
-        <g stroke="#f4762a" stroke-width="1.2" opacity="0.8">
-          <line x1="90" y1="110" x2="200" y2="110"/><line x1="90" y1="130" x2="230" y2="130"/>
-          <line x1="90" y1="150" x2="180" y2="150"/><line x1="90" y1="170" x2="260" y2="170"/>
-        </g>
-        <circle cx="255" cy="150" r="26" fill="none" stroke="#f4762a" stroke-width="2"/>
-        <circle cx="255" cy="150" r="8" fill="#f4762a"/>
-        <g stroke="#f4762a" stroke-width="1.5">
-          <line x1="255" y1="118" x2="255" y2="128"/><line x1="255" y1="172" x2="255" y2="182"/>
-          <line x1="223" y1="150" x2="233" y2="150"/><line x1="277" y1="150" x2="287" y2="150"/>
-        </g>
-        <rect x="120" y="240" width="160" height="10" rx="5" fill="#f4762a" opacity="0.25"/>
-        <rect x="120" y="240" width="95" height="10" rx="5" fill="#f4762a"/>
-      </svg>
     </div>
   </section>
 
