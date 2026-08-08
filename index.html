@@ -143,15 +143,6 @@
   .work-slot .sub{ font-size:0.72rem; color:var(--text-faint); }
   @media (max-width:900px){ .work-grid{ grid-template-columns:repeat(2,1fr); } }
 
-  .work-photo{
-    border-radius:var(--radius); overflow:hidden; border:1px solid var(--line-soft);
-    background:var(--bg-card); transition:border-color .2s, transform .2s;
-  }
-  .work-photo:hover{ border-color:var(--orange); transform:translateY(-3px); }
-  .work-photo .img-box{ aspect-ratio:1/1; overflow:hidden; }
-  .work-photo .img-box img{ width:100%; height:100%; object-fit:cover; }
-  .work-photo .cap{ padding:14px 16px; font-size:0.85rem; font-weight:700; text-align:center; }
-
   /* ---------- DEVICES CTA (no fake inventory) ---------- */
   .devices-cta{
     background:linear-gradient(135deg, var(--bg-raised), #1c130a);
@@ -206,7 +197,11 @@
 <header>
   <nav class="wrap">
     <div class="brand">
-      <img src="assets/logo-full.jpg" alt="TiTO Computer Care" style="height:42px; width:auto; border-radius:6px;">
+      <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect width="34" height="34" rx="8" fill="#f4762a"/><path d="M9 22V12l8 6 8-6v10" stroke="#0c0c0e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div>
+        <div class="brand-name">TiTO<span class="dot">.</span></div>
+        <div class="brand-sub">COMPUTER CARE</div>
+      </div>
     </div>
     <div class="nav-links">
       <a href="#services">خدماتنا</a>
@@ -346,23 +341,28 @@
       <span class="section-tag">معرض أعمالنا</span>
       <h2>نماذج من <span>شغلنا الحقيقي</span></h2>
       <div class="rule"></div>
+      <p style="color:var(--text-dim); font-size:0.9rem; margin-top:16px;">جاهزين لعرض صور حقيقية من صيانات فعلية — تحديث قريب.</p>
     </div>
     <div class="work-grid">
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-chassis-weld.jpg" alt="لحام شاسيه لابتوب مكسور" loading="lazy"></div>
-        <div class="cap">لحام شاسيه مكسور</div>
+      <div class="work-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-11 11"/></svg>
+        <div class="label">لحام شاسيه مكسور</div>
+        <div class="sub">صورة قادمة</div>
       </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-cooler-wash.jpg" alt="غسيل وصيانة المبرد" loading="lazy"></div>
-        <div class="cap">غسيل وصيانة المبرد</div>
+      <div class="work-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-11 11"/></svg>
+        <div class="label">صيانة البورد وغسله</div>
+        <div class="sub">صورة قادمة</div>
       </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-fan-clean.jpg" alt="تنظيف المراوح من الأتربة" loading="lazy"></div>
-        <div class="cap">تنظيف المراوح والمبرد</div>
+      <div class="work-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-11 11"/></svg>
+        <div class="label">تنظيف المراوح والمبرد</div>
+        <div class="sub">صورة قادمة</div>
       </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-screen-repair.jpg" alt="صيانة شاشة iMac" loading="lazy"></div>
-        <div class="cap">صيانة الشاشة</div>
+      <div class="work-slot">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="M21 15l-5-5-11 11"/></svg>
+        <div class="label">صيانة الشاشة</div>
+        <div class="sub">صورة قادمة</div>
       </div>
     </div>
   </section>
