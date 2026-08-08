@@ -7,7 +7,7 @@
 <meta name="description" content="تيتو كمبيوتر كير - صيانة كمبيوتر ولابتوب في فيصل، الجيزة، من عام 2001. نصلح الأعطال الصعبة اللي محلات تانية بترفضها. لحام شاسيهات، ويندوز أصلي، بيع لابتوبات مستعملة.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Poppins:wght@600;800;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #0c0c0e;
@@ -98,10 +98,18 @@
     background:linear-gradient(90deg, rgba(6,6,7,0.97) 0%, rgba(6,6,7,0.88) 32%, rgba(6,6,7,0.45) 60%, rgba(6,6,7,0.05) 85%);
   }
   .hero-banner-content{ position:relative; z-index:2; padding:44px 40px; max-width:640px; }
-  .hero-logo-line{ display:flex; align-items:baseline; gap:4px; margin-bottom:6px; }
-  .hero-logo-line .lg1{ font-size:2.6rem; font-weight:900; color:#fff; letter-spacing:-0.02em; font-family:'Tajawal',sans-serif; font-style:italic; }
+  .hero-logo-line{ display:flex; align-items:baseline; gap:2px; margin-bottom:0; direction:ltr; justify-content:flex-start; }
+  .hero-logo-line .lg1{ font-size:2.8rem; font-weight:800; color:#fff; letter-spacing:0.01em; font-family:'Poppins',sans-serif; }
   .hero-logo-line .lg1 .dot{ color:var(--orange); }
-  .hero-logo-line2{ font-size:1.6rem; font-weight:800; color:var(--orange); margin-bottom:18px; font-family:'Tajawal',sans-serif; }
+  .hero-logo-line2{ font-size:1.9rem; font-weight:800; margin-bottom:8px; font-family:'Poppins',sans-serif; letter-spacing:0; direction:ltr; text-align:left; }
+  .hero-logo-line2 .word-computer{ color:#fff; }
+  .hero-logo-line2 .word-care{ color:var(--orange); }
+  .hero-tagline{
+    direction:ltr; text-align:left; font-family:'Poppins',sans-serif; font-weight:600;
+    font-size:0.82rem; letter-spacing:0.18em; color:var(--text-dim);
+    display:flex; align-items:center; gap:10px; margin-bottom:22px;
+  }
+  .hero-tagline::before, .hero-tagline::after{ content:""; width:22px; height:1px; background:var(--text-faint); }
   .hero-banner h1{ font-size:1.5rem; margin-bottom:14px; }
   .hero-banner .hero-desc{ font-size:0.95rem; margin-bottom:16px; max-width:100%; }
   .hero-banner .hero-feats{ margin:14px 0 22px; gap:16px; }
@@ -110,8 +118,9 @@
     .hero-banner{ min-height:auto; justify-content:flex-start; }
     .hero-banner-content{ padding:32px 22px; max-width:100%; }
     .hero-banner::before{ background:linear-gradient(180deg, rgba(6,6,7,0.75) 0%, rgba(6,6,7,0.94) 55%, rgba(6,6,7,0.98) 100%); }
-    .hero-logo-line .lg1{ font-size:1.9rem; }
-    .hero-logo-line2{ font-size:1.2rem; }
+    .hero-logo-line .lg1{ font-size:2.1rem; }
+    .hero-logo-line2{ font-size:1.4rem; }
+    .hero-tagline{ font-size:0.72rem; }
   }
 
   /* ---------- shared section ---------- */
@@ -130,10 +139,11 @@
   }
   .service-card:hover{ border-color:var(--orange); transform:translateY(-3px); }
   .service-icon{
-    width:42px; height:42px; border-radius:10px; background:var(--orange-dim);
+    width:48px; height:48px; border-radius:50%; background:var(--orange-dim);
+    border:1px solid rgba(244,118,42,0.3);
     display:flex; align-items:center; justify-content:center; margin-bottom:16px;
   }
-  .service-icon svg{ width:22px; height:22px; color:var(--orange-bright); }
+  .service-icon svg{ width:24px; height:24px; color:var(--orange-bright); }
   .service-card h3{ font-size:0.98rem; margin-bottom:10px; }
   .service-card ul{ list-style:none; }
   .service-card li{ font-size:0.82rem; color:var(--text-dim); margin-bottom:5px; padding-inline-start:12px; position:relative; }
@@ -249,7 +259,8 @@
       <img src="assets/hero-board.jpg" alt="فني تيتو بيصلح بورد لابتوب">
       <div class="hero-banner-content">
         <div class="hero-logo-line"><span class="lg1">TiTO<span class="dot">.</span></span></div>
-        <div class="hero-logo-line2">Computer Care</div>
+        <div class="hero-logo-line2"><span class="word-computer">Computer</span> <span class="word-care">Care</span></div>
+        <div class="hero-tagline">computer services</div>
         <h1>صيانة الكمبيوتر واللاب توب <span class="hl">باحتراف</span></h1>
         <p class="hero-desc">إصلاح الأعطال الصعبة <strong>التي ترفضها محلات أخرى</strong></p>
         <div class="hero-feats">
@@ -277,22 +288,22 @@
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="12" rx="1.5"/><path d="M2 20h20M9 20l1-4M15 20l-1-4"/></svg></div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.1-3.1a4 4 0 01-5.4 5.4L6.3 20.7a2 2 0 01-2.8-2.8L12.6 8.8a4 4 0 015.4-5.4l-3.1 3.1z"/></svg></div>
         <h3>صيانة وإصلاح</h3>
         <ul><li>أعطال الهارد وير والسوفت وير</li><li>صيانة البورد وغسله</li><li>تشخيص وإصلاح أعطال معقدة</li></ul>
       </div>
       <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 12h4l2-4 4 8 2-4h4"/></svg></div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="6" width="18" height="12" rx="1.5"/><path d="M3 6l9 6 9-6M8 18v-4M16 18v-4"/></svg></div>
         <h3>الشاسيهات والهيكل</h3>
         <ul><li>لحام الشاسيهات المكسورة حتى لو بالكامل</li><li>تقوية ودعم الهيكل</li></ul>
       </div>
       <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v4M9 8h6M6 12h12M6 12a6 6 0 0012 0"/></svg></div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M12 12c0-3 1.5-6 4-6.5 2-.4 3 1 2.5 3-.5 2.3-3.3 3.5-6.5 3.5zM12 12c3 0 6 1.5 6.5 4 .4 2-1 3-3 2.5-2.3-.5-3.5-3.3-3.5-6.5zM12 12c0 3-1.5 6-4 6.5-2 .4-3-1-2.5-3 .5-2.3 3.3-3.5 6.5-3.5zM12 12c-3 0-6-1.5-6.5-4-.4-2 1-3 3-2.5C10.8 6 12 8.8 12 12z"/></svg></div>
         <h3>التبريد والمراوح</h3>
         <ul><li>تغيير وصيانة المبردات (Cooler)</li><li>غسيل وصيانة المراوح</li><li>حل مشاكل الحرارة والتهنيج</li></ul>
       </div>
       <div class="service-card">
-        <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M8 7h8M8 11h8M8 15h4"/></svg></div>
+        <div class="service-icon"><svg viewBox="0 0 24 24" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="0.6"/><rect x="13" y="3" width="8" height="8" rx="0.6"/><rect x="3" y="13" width="8" height="8" rx="0.6"/><rect x="13" y="13" width="8" height="8" rx="0.6"/></svg></div>
         <h3>السوفت وير والبيانات</h3>
         <ul><li>تركيب ويندوز أصلي 100%</li><li>برامج أصلية ومضمونة</li><li>استرجاع البيانات وحل Bad Sector</li></ul>
       </div>
@@ -355,8 +366,8 @@
     </div>
     <div class="work-grid">
       <div class="work-photo">
-        <div class="img-box"><img src="assets/work-chassis-weld.jpg" alt="لحام شاسيه لابتوب مكسور" loading="lazy"></div>
-        <div class="cap">لحام شاسيه مكسور</div>
+        <div class="img-box"><img src="assets/work-chassis-weld.jpg" alt="فحص وإصلاح هيكل اللابتوب" loading="lazy"></div>
+        <div class="cap">فحص وإصلاح الشاسيه</div>
       </div>
       <div class="work-photo">
         <div class="img-box"><img src="assets/work-cooler-wash.jpg" alt="غسيل وصيانة المبرد" loading="lazy"></div>
@@ -364,11 +375,11 @@
       </div>
       <div class="work-photo">
         <div class="img-box"><img src="assets/work-fan-clean.jpg" alt="تنظيف المراوح من الأتربة" loading="lazy"></div>
-        <div class="cap">تنظيف المراوح والمبرد</div>
+        <div class="cap">تنظيف المراوح من الأتربة</div>
       </div>
       <div class="work-photo">
         <div class="img-box"><img src="assets/work-screen-repair.jpg" alt="صيانة شاشة iMac" loading="lazy"></div>
-        <div class="cap">صيانة الشاشة</div>
+        <div class="cap">صيانة شاشة iMac</div>
       </div>
     </div>
   </section>
