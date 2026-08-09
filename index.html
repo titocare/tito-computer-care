@@ -5,6 +5,60 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tito Computer Care - تيتو كمبيوتر كير | صيانة كمبيوتر ولابتوب فيصل الجيزة</title>
 <meta name="description" content="تيتو كمبيوتر كير - صيانة كمبيوتر ولابتوب في فيصل، الجيزة، من عام 2001. نصلح الأعطال الصعبة اللي محلات تانية بترفضها. لحام شاسيهات، ويندوز أصلي، بيع لابتوبات مستعملة.">
+<link rel="canonical" href="https://titocare.github.io/tito-computer-care/">
+<link rel="icon" type="image/jpeg" href="assets/logo-full.jpg">
+<link rel="apple-touch-icon" href="assets/logo-full.jpg">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="TiTO Computer Care">
+<meta property="og:title" content="Tito Computer Care - صيانة كمبيوتر ولابتوب فيصل الجيزة">
+<meta property="og:description" content="صيانة كمبيوتر ولابتوب في فيصل، الجيزة، من عام 2001. نصلح الأعطال الصعبة اللي محلات تانية بترفضها.">
+<meta property="og:image" content="https://titocare.github.io/tito-computer-care/assets/hero-board.jpg">
+<meta property="og:url" content="https://titocare.github.io/tito-computer-care/">
+<meta property="og:locale" content="ar_EG">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tito Computer Care - صيانة كمبيوتر ولابتوب فيصل الجيزة">
+<meta name="twitter:description" content="صيانة كمبيوتر ولابتوب في فيصل، الجيزة، من عام 2001. نصلح الأعطال الصعبة اللي محلات تانية بترفضها.">
+<meta name="twitter:image" content="https://titocare.github.io/tito-computer-care/assets/hero-board.jpg">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ComputerRepair",
+  "name": "TiTO Computer Care",
+  "image": "https://titocare.github.io/tito-computer-care/assets/hero-board.jpg",
+  "logo": "https://titocare.github.io/tito-computer-care/assets/logo-full.jpg",
+  "url": "https://titocare.github.io/tito-computer-care/",
+  "telephone": "+201143080343",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "4 شارع فخري الدالي - دكتور لاشين",
+    "addressLocality": "فيصل، الجيزة",
+    "addressCountry": "EG"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday","Monday","Tuesday","Wednesday","Thursday","Saturday"],
+      "opens": "15:00",
+      "closes": "01:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "83"
+  },
+  "sameAs": [
+    "https://www.facebook.com/TitoComputerCare"
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Poppins:wght@600;800;900&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
@@ -58,7 +112,24 @@
     display:flex; align-items:center; gap:8px; transition:background .2s, transform .15s;
   }
   .nav-cta:hover{ background:var(--orange-bright); transform:translateY(-1px); }
-  @media (max-width:900px){ .nav-links{ display:none; } }
+  .nav-toggle{
+    display:none; background:none; border:1px solid var(--line); border-radius:8px;
+    width:42px; height:42px; align-items:center; justify-content:center; cursor:pointer;
+    color:var(--text); flex-shrink:0;
+  }
+  .nav-toggle svg{ width:20px; height:20px; }
+  @media (max-width:900px){
+    .nav-links{
+      display:none; position:absolute; top:100%; inset-inline:0;
+      flex-direction:column; gap:0; background:var(--bg-raised);
+      border-bottom:1px solid var(--line-soft); padding:8px 24px 16px;
+    }
+    .nav-links.open{ display:flex; }
+    .nav-links a{ padding:12px 0; border-bottom:1px solid var(--line-soft); }
+    .nav-links a:last-child{ border-bottom:none; }
+    .nav-toggle{ display:flex; }
+  }
+  nav.wrap{ position:relative; }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -162,16 +233,8 @@
   @media (max-width:900px){ .why-grid{ grid-template-columns:repeat(3,1fr); } }
   @media (max-width:560px){ .why-grid{ grid-template-columns:repeat(2,1fr); } }
 
-  /* ---------- WORK GALLERY (placeholder, honest) ---------- */
+  /* ---------- WORK GALLERY ---------- */
   .work-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
-  .work-slot{
-    aspect-ratio:1/1; border-radius:var(--radius); border:1.5px dashed var(--line);
-    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-    background:var(--bg-card); text-align:center; padding:16px;
-  }
-  .work-slot svg{ width:30px; height:30px; color:var(--text-faint); }
-  .work-slot .label{ font-size:0.8rem; color:var(--text-dim); font-weight:700; }
-  .work-slot .sub{ font-size:0.72rem; color:var(--text-faint); }
   @media (max-width:900px){ .work-grid{ grid-template-columns:repeat(2,1fr); } }
 
   .work-photo{
@@ -254,7 +317,7 @@
     <div class="brand">
       <img src="assets/logo-full.jpg" alt="TiTO Computer Care" style="height:42px; width:auto; border-radius:6px;">
     </div>
-    <div class="nav-links">
+    <div class="nav-links" id="navLinks">
       <a href="#services">خدماتنا</a>
       <a href="#work">أعمالنا</a>
       <a href="#about">من نحن</a>
@@ -263,6 +326,9 @@
     <a class="nav-cta" href="https://wa.me/201143080343" target="_blank">
       احجز صيانة الآن
     </a>
+    <button class="nav-toggle" id="navToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="navLinks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
   </nav>
 </header>
 
@@ -454,7 +520,7 @@
       <div class="contact-list">
         <div class="contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3 19.5 19.5 0 01-6-6 19.8 19.8 0 01-3-8.7A2 2 0 014.1 2h3a2 2 0 012 1.7c.1.9.3 1.9.6 2.7a2 2 0 01-.5 2.1L8 9.7a16 16 0 006 6l1.2-1.2a2 2 0 012.1-.5c.9.3 1.8.5 2.7.6a2 2 0 011.7 2z"/></svg>
-          <div><div class="label">التليفون</div><div class="value"><a href="tel:0201143080343">01143080343</a></div></div>
+          <div><div class="label">التليفون</div><div class="value"><a href="tel:+201143080343">01143080343</a></div></div>
         </div>
         <div class="contact-row">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a10 10 0 00-8.6 15L2 22l5.2-1.4A10 10 0 1012 2z"/></svg>
@@ -502,5 +568,19 @@
   </div>
 </footer>
 
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
 </body>
 </html>
