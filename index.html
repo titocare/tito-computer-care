@@ -250,6 +250,13 @@
   .arrival-info{ padding:14px 16px 16px; }
   .arrival-info h3{ font-size:0.92rem; margin-bottom:6px; }
   .arrival-info .price{ font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--orange-bright); font-size:0.9rem; }
+  .arrival-thumbs{ display:flex; gap:6px; padding:0 16px 16px; flex-wrap:wrap; }
+  .arrival-thumbs img{
+    width:36px; height:36px; object-fit:cover; border-radius:6px; cursor:pointer;
+    border:1.5px solid var(--line-soft); opacity:0.7; transition:opacity .2s, border-color .2s;
+  }
+  .arrival-thumbs img:hover{ opacity:1; }
+  .arrival-thumbs img.active{ border-color:var(--orange); opacity:1; }
   @media (max-width:900px){ .arrivals-grid{ grid-template-columns:repeat(2,1fr); } }
   @media (max-width:520px){ .arrivals-grid{ grid-template-columns:1fr; } }
 
@@ -433,17 +440,8 @@
       <h2>لاب توب استيراد <span>وصل حديثًا</span></h2>
       <div class="rule"></div>
     </div>
-    <div class="arrivals-grid">
-      <div class="arrival-card">
-        <div class="img-box">
-          <span class="badge-new">جديد</span>
-          <img src="assets/laptop-01.jpg" alt="لاب توب استيراد" loading="lazy">
-        </div>
-        <div class="arrival-info">
-          <h3>اسم اللابتوب</h3>
-          <span class="price">السعر جنيه</span>
-        </div>
-      </div>
+    <div class="arrivals-grid" id="laptops-arrivals-grid">
+      <!-- تتم تعبئتها تلقائيًا من assets/laptops/manifest.json -->
     </div>
   </section>
 
@@ -454,17 +452,8 @@
       <h2>قطع غيار استيراد أصلية <span>وصلت حديثًا</span></h2>
       <div class="rule"></div>
     </div>
-    <div class="arrivals-grid">
-      <div class="arrival-card">
-        <div class="img-box">
-          <span class="badge-new">جديد</span>
-          <img src="assets/part-01.jpg" alt="قطعة غيار أصلية" loading="lazy">
-        </div>
-        <div class="arrival-info">
-          <h3>اسم القطعة</h3>
-          <span class="price">السعر جنيه</span>
-        </div>
-      </div>
+    <div class="arrivals-grid" id="parts-arrivals-grid">
+      <!-- تتم تعبئتها تلقائيًا من assets/parts/manifest.json -->
     </div>
   </section>
 
@@ -507,23 +496,8 @@
       <h2>نماذج من <span>شغلنا الحقيقي</span></h2>
       <div class="rule"></div>
     </div>
-    <div class="work-grid">
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-chassis-weld.jpg" alt="فحص وإصلاح هيكل اللابتوب" loading="lazy"></div>
-        <div class="cap">فحص وإصلاح الشاسيه</div>
-      </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-cooler-wash.jpg" alt="غسيل وصيانة المبرد" loading="lazy"></div>
-        <div class="cap">غسيل وصيانة المبرد</div>
-      </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-fan-clean.jpg" alt="تنظيف المراوح من الأتربة" loading="lazy"></div>
-        <div class="cap">تنظيف المراوح من الأتربة</div>
-      </div>
-      <div class="work-photo">
-        <div class="img-box"><img src="assets/work-screen-repair.jpg" alt="صيانة شاشة iMac" loading="lazy"></div>
-        <div class="cap">صيانة شاشة iMac</div>
-      </div>
+    <div class="work-grid" id="work-grid">
+      <!-- تتم تعبئتها تلقائيًا من assets/repairs/manifest.json -->
     </div>
   </section>
 
@@ -644,6 +618,89 @@
       navToggle.setAttribute('aria-expanded', 'false');
     });
   });
+
+  /* ---------- AUTO GALLERY: laptops for sale + repair work ---------- */
+  /* اسم الصورة المتوقع: {رقم المجموعة}-{رقم الصورة}-{وصف}.jpg
+     مثال بيع:   04-1-Dell-N5110-i5-8GB-15000EGP.jpg
+     مثال صيانة: 07-1-HP-Pavilion-كسر شاشة-تم الاصلاح.jpg
+     أعلى رقم مجموعة = يظهر أول واحد. الصورة رقم 1 داخل نفس المجموعة = الغلاف. */
+  async function loadGallery(folder, containerId, cardType) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+
+    let files;
+    try {
+      const res = await fetch(`assets/${folder}/manifest.json`, { cache: 'no-store' });
+      if (!res.ok) throw new Error('manifest not found');
+      files = await res.json();
+    } catch (e) {
+      return; // لسه مفيش manifest.json (أول مرة قبل أول push) - السكشن يفضل فاضي بدون أخطاء
+    }
+
+    const groups = {};
+    files.forEach(f => {
+      const m = f.match(/^(\d+)-(\d+)-(.+)\.(jpe?g|png|webp)$/i);
+      if (!m) return;
+      const [, group, sub, rawDesc] = m;
+      (groups[group] = groups[group] || []).push({ sub: parseInt(sub, 10), file: f, rawDesc });
+    });
+
+    const groupIds = Object.keys(groups).sort((a, b) => b - a); // الأحدث (أعلى رقم) أول واحد
+    if (!groupIds.length) return;
+
+    container.innerHTML = groupIds.map(gid => {
+      const photos = groups[gid].sort((a, b) => a.sub - b.sub);
+      const cover = photos[0];
+      let desc = cover.rawDesc.replace(/-/g, ' ').trim();
+      let price = '';
+      const priceMatch = desc.match(/(\d[\d,]*)\s*EGP$/i);
+      if (priceMatch) {
+        price = priceMatch[1] + ' جنيه';
+        desc = desc.slice(0, priceMatch.index).trim();
+      }
+
+      if (cardType === 'arrival') {
+        const thumbs = photos.length > 1 ? `
+          <div class="arrival-thumbs">
+            ${photos.map((p, i) => `<img src="assets/${folder}/${p.file}" data-idx="${i}" class="${i === 0 ? 'active' : ''}" loading="lazy" alt="صورة ${i + 1}">`).join('')}
+          </div>` : '';
+        return `
+          <div class="arrival-card" data-group="${gid}">
+            <div class="img-box">
+              <span class="badge-new">جديد</span>
+              <img src="assets/${folder}/${cover.file}" alt="${desc}" loading="lazy" class="main-img">
+            </div>
+            <div class="arrival-info">
+              <h3>${desc}</h3>
+              ${price ? `<span class="price">${price}</span>` : ''}
+            </div>
+            ${thumbs}
+          </div>`;
+      }
+      return `
+        <div class="work-photo">
+          <div class="img-box"><img src="assets/${folder}/${cover.file}" alt="${desc}" loading="lazy"></div>
+          <div class="cap">${desc}</div>
+        </div>`;
+    }).join('');
+
+    if (cardType === 'arrival') {
+      container.querySelectorAll('.arrival-card').forEach(card => {
+        const main = card.querySelector('.main-img');
+        card.querySelectorAll('.arrival-thumbs img').forEach(thumb => {
+          thumb.addEventListener('click', () => {
+            main.src = thumb.src;
+            card.querySelectorAll('.arrival-thumbs img').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+          });
+        });
+      });
+    }
+  }
+
+  loadGallery('laptops', 'laptops-arrivals-grid', 'arrival');
+  loadGallery('parts', 'parts-arrivals-grid', 'arrival');
+  loadGallery('repairs', 'work-grid', 'work');
 </script>
 </body>
 </html>
